@@ -166,6 +166,8 @@
   .facility .faddr{font-size:11px;color:var(--sub);margin-top:2px;}
   .facility .fdo{font-size:12px;margin-top:8px;line-height:1.6;}
   .facility .fdo b{color:var(--forest);font-size:11px;}
+  .facility .fdo a{color:var(--forest);font-weight:700;text-decoration:none;}
+  .facility .fdo a:hover{text-decoration:underline;}
 
   /* event highlight */
   .highlight{
@@ -206,6 +208,19 @@
   .schedule-pattern{display:none;}
   .schedule-pattern.active{display:block;}
   .pattern-note{font-size:11.5px;color:var(--sub);background:var(--sky-soft);border-radius:10px;padding:9px 12px;margin-bottom:14px;line-height:1.6;}
+
+  .weather-card{border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:16px;background:#fdfbf4;}
+  .weather-title{font-size:13.5px;font-weight:700;margin-bottom:10px;}
+  .weather-loading{font-size:12px;color:var(--sub);}
+  .weather-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:8px;}
+  .weather-day{border:1px solid var(--line);border-radius:10px;padding:10px 6px;text-align:center;background:#fff;}
+  .weather-day .wd-date{font-size:11px;color:var(--sub);font-weight:700;}
+  .weather-day .wd-icon{font-size:22px;margin:6px 0 4px;}
+  .weather-day .wd-temp{font-size:12px;font-weight:700;color:var(--ink);}
+  .weather-day .wd-temp .lo{color:var(--sky);font-weight:600;}
+  .weather-day .wd-pop{font-size:11px;color:var(--sky);margin-top:5px;font-weight:600;}
+  .weather-day .wd-wind{font-size:10.5px;color:var(--sub);margin-top:2px;}
+  .weather-note{font-size:10.5px;color:var(--sub);margin-top:10px;}
 
   .coming-soon-wrap{position:relative;}
   .coming-soon-blur{filter:blur(5px);opacity:0.55;pointer-events:none;user-select:none;}
@@ -270,7 +285,8 @@
   <a href="#schedule">SCHEDULE<span class="ja">（スケジュール）</span></a>
   <a href="#area">MAP<span class="ja">（マップ）</span></a>
   <a href="#event">EVENT INFO<span class="ja">（イベント情報）</span></a>
-  <a href="#etc">OTHER<span class="ja">（エトセトラ）</span></a>
+  <a href="#settlement">SETTLEMENT<span class="ja">（精算）</span></a>
+  <a href="#etc">OTHER<span class="ja">（そのほか）</span></a>
 </div>
 
 <div class="wrap">
@@ -288,21 +304,13 @@
       </div>
     </div>
 
-    <a href="https://s-mountain.com/hakuba/" target="_blank" rel="noopener" class="official-banner">
-      <div class="official-banner-text">
-        <div class="official-banner-eyebrow">HAKUBA CLASSIC INTERNATIONAL</div>
-        <div class="official-banner-title">白馬国際クラシック 公式サイトを見る</div>
-      </div>
-      <div class="official-banner-arrow">→</div>
-    </a>
-
     <div class="card">
       <h2>MEMBERS <span class="n">5</span></h2>
       <div class="members">
         <div class="member">
           <span class="course c50">50km</span>
           <div class="name">Go</div>
-          <div class="meta">Start 7:00 ／ Cutoff 18:00<br>Solo Entry ／ ¥18,000</div>
+          <div class="meta">Start 7:00 ／ Cutoff 18:00</div>
           <div class="bib">BIB No: Coming Soon!</div>
           <div class="prev">Previous Result: Not yet recorded</div>
           <div class="result">Result: To be updated after the race</div>
@@ -310,15 +318,15 @@
         <div class="member">
           <span class="course c29">29km</span>
           <div class="name">Hirono</div>
-          <div class="meta">Start 8:30 ／ Cutoff 16:00<br>Solo Entry ／ ¥15,000</div>
+          <div class="meta">Start 8:30 ／ Cutoff 16:00</div>
           <div class="bib">BIB No: Coming Soon!</div>
-          <div class="prev">Previous Result: 29km, 6:30:00</div>
+          <div class="prev">Previous Result: 2025 29km, 6:30:00</div>
           <div class="result">Result: To be updated after the race</div>
         </div>
         <div class="member">
           <span class="course c29">29km</span>
           <div class="name">Nat</div>
-          <div class="meta">Start 8:30 ／ Cutoff 16:00<br>Solo Entry ／ ¥15,000</div>
+          <div class="meta">Start 8:30 ／ Cutoff 16:00</div>
           <div class="bib">BIB No: Coming Soon!</div>
           <div class="prev">Previous Result: 2024 50km Trail, 7:53:27</div>
           <div class="result">Result: To be updated after the race</div>
@@ -326,7 +334,7 @@
         <div class="member">
           <span class="course c12">12km</span>
           <div class="name">Junsuke</div>
-          <div class="meta">Start 9:00 ／ Cutoff 13:00<br>Solo Entry ／ ¥10,000</div>
+          <div class="meta">Start 9:00 ／ Cutoff 13:00</div>
           <div class="bib">BIB No: Coming Soon!</div>
           <div class="prev">Previous Result: Not yet recorded</div>
           <div class="result">Result: To be updated after the race</div>
@@ -334,7 +342,7 @@
         <div class="member">
           <span class="course c12">12km</span>
           <div class="name">Hina</div>
-          <div class="meta">Start 9:00 ／ Cutoff 13:00<br>Solo Entry ／ ¥10,000</div>
+          <div class="meta">Start 9:00 ／ Cutoff 13:00</div>
           <div class="bib">BIB No: Coming Soon!</div>
           <div class="prev">Previous Result: Not yet recorded</div>
           <div class="result">Result: To be updated after the race</div>
@@ -345,74 +353,49 @@
 
   <section id="schedule">
     <div class="section-title"><span class="peak">▲</span>SCHEDULE <span class="title-ja">（スケジュール）</span></div>
+
     <div class="card">
-      <div class="schedule-toggle">
-        <button id="btn-train" class="active" onclick="showPattern('train')">パターンA：電車（あずさ）</button>
-        <button id="btn-car" onclick="showPattern('car')">パターンB：車</button>
-      </div>
+      <h2>INFORMATION <span class="n">直前確認</span></h2>
+      <ul class="checklist">
+        <li>ゼッケン（BIB）番号を確認する（MEMBERSページに掲載）</li>
+        <li>天気・降水確率・風を確認する（MAPページの週間天気）</li>
+        <li>持ち物・必携装備を確認する（OTHERページ）</li>
+        <li>集合時間・場所を確認する（9/12 7:30 新宿集合）</li>
+      </ul>
+    </div>
 
-      <div id="pattern-train" class="schedule-pattern active">
-        <span class="day-label">9/12（土）前泊day</span>
-        <table>
-          <tr><th>時刻</th><th>内容</th></tr>
-          <tr><td>8:00</td><td>新宿駅集合・あずさ5号 出発</td></tr>
-          <tr><td>11:40</td><td>白馬駅 到着</td></tr>
-          <tr><td>12:00〜</td><td>散策ジョグ＋川遊び（松川・白馬大橋周辺）＋ジェラート（TABITABI）</td></tr>
-          <tr><td>12:00〜17:00</td><td>前日受付（@八方第二駐車場）</td></tr>
-          <tr><td>16:00〜17:00</td><td>ザ・ビッグ白馬店で食材買い出し</td></tr>
-          <tr><td>18:00〜</td><td>前夜ご飯（自炊）</td></tr>
-          <tr><td>21:00〜22:00</td><td>就寝</td></tr>
-        </table>
+    <div class="card">
+      <div class="pattern-note" style="margin-bottom:16px;"><b>パターンA：車移動（Go's Car）</b><br>往路の運転はGoさんが担当。復路はGo・Junsukeで交代しながら運転します。中央道 or 上信越道経由で新宿〜白馬 約4時間（休憩込み）が目安です。当日の渋滞状況で前後します。</div>
 
-        <span class="day-label">9/13（日）レース当日〜帰路</span>
-        <table>
-          <tr><th>時刻</th><th>内容</th></tr>
-          <tr><td>5:30〜</td><td>Goさん 起床・朝食（宿で支給）</td></tr>
-          <tr><td>7:00</td><td>【50km】Go スタート</td></tr>
-          <tr><td>8:30</td><td>【29km】Hirono・Nat スタート</td></tr>
-          <tr><td>9:00</td><td>【12km】Junsuke・Hina スタート</td></tr>
-          <tr><td>13:00</td><td>12kmカットオフ／Go 大出地点（23.5km）通過期限</td></tr>
-          <tr><td>14:30〜15:00頃</td><td>Go・Hirono・Nat ゴール目安</td></tr>
-          <tr><td>15:00〜16:30</td><td>全員合流、温泉（みみずくの湯）</td></tr>
-          <tr><td>16:30〜17:00</td><td>雪の荘で荷物ピックアップ</td></tr>
-          <tr><td>17:10 / 18:57</td><td>白馬駅発 大糸線（松本方面）</td></tr>
-          <tr><td>20:10頃</td><td>松本駅発 あずさ（最終・要再確認）</td></tr>
-          <tr><td>22:45頃</td><td>新宿駅 到着</td></tr>
-        </table>
-      </div>
+      <span class="day-label">9/12（土）前泊day</span>
+      <table>
+        <tr><th>時刻</th><th>内容</th></tr>
+        <tr><td>7:30</td><td>新宿集合・車で出発</td></tr>
+        <tr><td>7:30〜11:30頃</td><td>車で白馬へ移動（中央道 or 上信越道、休憩込み約4時間）</td></tr>
+        <tr><td>11:30〜</td><td>散策ジョグ＋川遊び（松川・白馬大橋周辺）＋ジェラート（TABITABI）</td></tr>
+        <tr><td>12:00〜17:00</td><td>前日受付（@八方第二駐車場）</td></tr>
+        <tr><td>16:00〜17:00</td><td>ザ・ビッグ白馬店で食材買い出し</td></tr>
+        <tr><td>18:00〜</td><td>前夜ご飯（自炊）</td></tr>
+        <tr><td>21:00〜22:00</td><td>就寝</td></tr>
+      </table>
 
-      <div id="pattern-car" class="schedule-pattern">
-        <div class="pattern-note">運転はGoさんが担当です。車移動は中央道 or 上信越道経由で新宿〜白馬 約4時間（休憩込み）が目安です。当日の渋滞状況で前後します。</div>
-        <span class="day-label">9/12（土）前泊day</span>
-        <table>
-          <tr><th>時刻</th><th>内容</th></tr>
-          <tr><td>7:30</td><td>新宿集合・車で出発</td></tr>
-          <tr><td>7:30〜11:30頃</td><td>車で白馬へ移動（中央道 or 上信越道、休憩込み約4時間）</td></tr>
-          <tr><td>11:30〜</td><td>散策ジョグ＋川遊び（松川・白馬大橋周辺）＋ジェラート（TABITABI）</td></tr>
-          <tr><td>12:00〜17:00</td><td>前日受付（@八方第二駐車場）</td></tr>
-          <tr><td>16:00〜17:00</td><td>ザ・ビッグ白馬店で食材買い出し</td></tr>
-          <tr><td>18:00〜</td><td>前夜ご飯（自炊）</td></tr>
-          <tr><td>21:00〜22:00</td><td>就寝</td></tr>
-        </table>
-
-        <span class="day-label">9/13（日）レース当日〜帰路</span>
-        <table>
-          <tr><th>時刻</th><th>内容</th></tr>
-          <tr><td>5:30〜</td><td>Goさん 起床・朝食（宿で支給）</td></tr>
-          <tr><td>7:00</td><td>【50km】Go スタート</td></tr>
-          <tr><td>8:30</td><td>【29km】Hirono・Nat スタート</td></tr>
-          <tr><td>9:00</td><td>【12km】Junsuke・Hina スタート</td></tr>
-          <tr><td>13:00</td><td>12kmカットオフ／Go 大出地点（23.5km）通過期限</td></tr>
-          <tr><td>14:30〜15:00頃</td><td>Go・Hirono・Nat ゴール目安</td></tr>
-          <tr><td>15:00〜16:30</td><td>全員合流、温泉（みみずくの湯）</td></tr>
-          <tr><td>16:30〜17:00</td><td>雪の荘で荷物ピックアップ、車に積み込み</td></tr>
-          <tr><td>17:00頃</td><td>車で出発（電車の最終時刻を気にせず、準備でき次第出発できる）</td></tr>
-          <tr><td>17:30〜19:00頃</td><td>大町でご飯（高速に乗る前、国道148号沿い）</td></tr>
-          <tr><td>19:00頃</td><td>安曇野ICから高速へ</td></tr>
-          <tr><td>21:30〜22:00頃</td><td>新宿 到着目安</td></tr>
-        </table>
-        <div class="pattern-note">大町は黒部ダムカレーやそばが名物です。国道148号沿いなので、高速に乗る前の立ち寄りにちょうどいい位置にあります。</div>
-      </div>
+      <span class="day-label">9/13（日）レース当日〜帰路</span>
+      <table>
+        <tr><th>時刻</th><th>内容</th></tr>
+        <tr><td>5:30〜</td><td>全員 起床・朝食（宿で支給）</td></tr>
+        <tr><td>7:00</td><td>【50km】Go スタート</td></tr>
+        <tr><td>8:30</td><td>【29km】Hirono・Nat スタート</td></tr>
+        <tr><td>9:00</td><td>【12km】Junsuke・Hina スタート</td></tr>
+        <tr><td>13:00</td><td>12kmカットオフ／Go 大出地点（23.5km）通過期限</td></tr>
+        <tr><td>14:30〜15:00頃</td><td>Go・Hirono・Nat ゴール目安</td></tr>
+        <tr><td>15:00〜16:30</td><td>全員合流、温泉（みみずくの湯）</td></tr>
+        <tr><td>16:30〜17:00</td><td>雪の荘で荷物ピックアップ、車に積み込み</td></tr>
+        <tr><td>17:00頃</td><td>車で出発（運転：Go→途中でJunsukeと交代）</td></tr>
+        <tr><td>17:30〜19:00頃</td><td>大町でご飯（高速に乗る前、国道148号沿い）</td></tr>
+        <tr><td>19:00頃</td><td>安曇野ICから高速へ</td></tr>
+        <tr><td>21:30〜22:00頃</td><td>新宿 到着目安</td></tr>
+      </table>
+      <div class="pattern-note">大町は黒部ダムカレーやそばが名物です。国道148号沿いなので、高速に乗る前の立ち寄りにちょうどいい位置にあります。</div>
     </div>
   </section>
 
@@ -427,6 +410,13 @@
       <div id="tab-areainfo" class="schedule-pattern active">
         <div class="map-note">※各スポットのピンは住所エリアからの推定位置です。正確な場所は地図アプリで確認してください。</div>
         <div id="map"></div>
+
+        <div class="weather-card">
+          <div class="weather-title">白馬村 週間天気</div>
+          <div id="weather-loading" class="weather-loading">天気情報を取得中...</div>
+          <div id="weather-grid" class="weather-grid"></div>
+          <div class="weather-note">データ提供：Open-Meteo（ページを開くたびに自動更新されます）</div>
+        </div>
 
         <div class="facilities">
           <div class="facility">
@@ -551,8 +541,93 @@
     </div>
   </section>
 
+  <section id="settlement">
+    <div class="section-title"><span class="peak">▲</span>SETTLEMENT <span class="title-ja">（精算）</span></div>
+    <div class="card">
+      <h2>費用精算</h2>
+      <div class="map-note">宿泊費・ガソリン代・高速代などの立て替え分をまとめて精算するページです。領収書がそろい次第、内訳と一人あたりの精算額を更新します。</div>
+
+      <div class="coming-soon-wrap">
+        <div class="coming-soon-badge"><span>Coming Soon!</span></div>
+        <div class="coming-soon-blur">
+          <table>
+            <tr><th>項目</th><th>金額</th><th>立替者</th><th>備考</th></tr>
+            <tr><td>宿泊費（雪の荘）</td><td>¥0</td><td>-</td><td>5人分・素泊まり</td></tr>
+            <tr><td>ガソリン代</td><td>¥0</td><td>Go</td><td>車移動の場合のみ</td></tr>
+            <tr><td>高速代</td><td>¥0</td><td>Go</td><td>車移動の場合のみ</td></tr>
+            <tr><td>前夜ご飯 食材（ザ・ビッグ白馬店）</td><td>¥0</td><td>-</td><td>買い出し担当分</td></tr>
+            <tr><td>温泉（みみずくの湯）</td><td>¥0</td><td>各自</td><td>各自精算</td></tr>
+          </table>
+          <div class="pattern-note" style="margin-top:14px;">一人あたり精算額：計算中</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="etc">
-    <div class="section-title"><span class="peak">▲</span>OTHER <span class="title-ja">（エトセトラ）</span></div>
+    <div class="section-title"><span class="peak">▲</span>OTHER <span class="title-ja">（そのほか）</span></div>
+
+    <div class="card">
+      <h2>リンク集</h2>
+      <a href="https://s-mountain.com/hakuba/" target="_blank" rel="noopener" class="official-banner">
+        <div class="official-banner-text">
+          <div class="official-banner-eyebrow">HAKUBA CLASSIC INTERNATIONAL</div>
+          <div class="official-banner-title">白馬国際クラシック 公式サイトを見る</div>
+        </div>
+        <div class="official-banner-arrow">→</div>
+      </a>
+      <div class="facilities" style="margin-top:14px;">
+        <div class="facility">
+          <div class="fname">雪の荘（宿）公式ページ</div>
+          <div class="faddr">白馬村観光局サイト内・源泉：白馬八方温泉／朝食無料</div>
+          <div class="fdo"><a href="https://www.vill.hakuba.nagano.jp/stay/happo/864.html" target="_blank" rel="noopener">ページを見る →</a></div>
+        </div>
+        <div class="facility">
+          <div class="fname">TABITABI Sakura Farm（Instagram）</div>
+          <div class="faddr">ジェラート・デザート</div>
+          <div class="fdo"><a href="https://www.instagram.com/tabitabi_sakurafarm/" target="_blank" rel="noopener">Instagramを見る →</a></div>
+        </div>
+        <div class="facility">
+          <div class="fname">雨雲レーダー（気象庁 高解像度降水ナウキャスト）</div>
+          <div class="faddr">白馬村付近を中心表示</div>
+          <div class="fdo"><a href="https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:36.6975/lon:137.8480/colordepth:normal/elements:hrpns" target="_blank" rel="noopener">レーダーを見る →</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>参考：電車移動の場合のスケジュール（あずさ利用）</h2>
+      <div class="map-note">現在のメインプランは車移動（Go's Car）ですが、参考用に電車利用時のスケジュールも残しておきます。</div>
+
+      <span class="day-label">9/12（土）前泊day</span>
+      <table>
+        <tr><th>時刻</th><th>内容</th></tr>
+        <tr><td>8:00</td><td>新宿駅集合・あずさ5号 出発</td></tr>
+        <tr><td>11:40</td><td>白馬駅 到着</td></tr>
+        <tr><td>12:00〜</td><td>散策ジョグ＋川遊び（松川・白馬大橋周辺）＋ジェラート（TABITABI）</td></tr>
+        <tr><td>12:00〜17:00</td><td>前日受付（@八方第二駐車場）</td></tr>
+        <tr><td>16:00〜17:00</td><td>ザ・ビッグ白馬店で食材買い出し</td></tr>
+        <tr><td>18:00〜</td><td>前夜ご飯（自炊）</td></tr>
+        <tr><td>21:00〜22:00</td><td>就寝</td></tr>
+      </table>
+
+      <span class="day-label">9/13（日）レース当日〜帰路</span>
+      <table>
+        <tr><th>時刻</th><th>内容</th></tr>
+        <tr><td>5:30〜</td><td>全員 起床・朝食（宿で支給）</td></tr>
+        <tr><td>7:00</td><td>【50km】Go スタート</td></tr>
+        <tr><td>8:30</td><td>【29km】Hirono・Nat スタート</td></tr>
+        <tr><td>9:00</td><td>【12km】Junsuke・Hina スタート</td></tr>
+        <tr><td>13:00</td><td>12kmカットオフ／Go 大出地点（23.5km）通過期限</td></tr>
+        <tr><td>14:30〜15:00頃</td><td>Go・Hirono・Nat ゴール目安</td></tr>
+        <tr><td>15:00〜16:30</td><td>全員合流、温泉（みみずくの湯）</td></tr>
+        <tr><td>16:30〜17:00</td><td>雪の荘で荷物ピックアップ</td></tr>
+        <tr><td>17:10 / 18:57</td><td>白馬駅発 大糸線（松本方面）</td></tr>
+        <tr><td>20:10頃</td><td>松本駅発 あずさ（最終・要再確認）</td></tr>
+        <tr><td>22:45頃</td><td>新宿駅 到着</td></tr>
+      </table>
+    </div>
+
     <div class="card">
       <h2>持ち物・必携装備</h2>
       <ul class="checklist">
@@ -804,6 +879,58 @@
     }, {passive:false});
     svg.addEventListener('touchend', handleLeave);
   }
+</script>
+<script>
+  function weatherEmoji(code){
+    if (code === 0) return '☀️';
+    if ([1,2].includes(code)) return '🌤️';
+    if (code === 3) return '☁️';
+    if ([45,48].includes(code)) return '🌫️';
+    if ([51,53,55,56,57].includes(code)) return '🌦️';
+    if ([61,63,65,66,67,80,81,82].includes(code)) return '🌧️';
+    if ([71,73,75,77,85,86].includes(code)) return '🌨️';
+    if ([95,96,99].includes(code)) return '⛈️';
+    return '🌤️';
+  }
+
+  function loadWeather(){
+    var grid = document.getElementById('weather-grid');
+    var loading = document.getElementById('weather-loading');
+    if (!grid) return;
+    var url = 'https://api.open-meteo.com/v1/forecast?latitude=36.6975&longitude=137.8480'
+      + '&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max,windspeed_10m_max'
+      + '&timezone=Asia%2FTokyo&forecast_days=7&wind_speed_unit=ms';
+
+    fetch(url).then(function(res){
+      if (!res.ok) throw new Error('weather fetch failed');
+      return res.json();
+    }).then(function(data){
+      var d = data.daily;
+      var html = '';
+      for (var i=0; i<d.time.length; i++){
+        var dt = new Date(d.time[i] + 'T00:00:00');
+        var mmdd = (dt.getMonth()+1) + '/' + dt.getDate();
+        var wday = ['日','月','火','水','木','金','土'][dt.getDay()];
+        var hi = Math.round(d.temperature_2m_max[i]);
+        var lo = Math.round(d.temperature_2m_min[i]);
+        var pop = d.precipitation_probability_max[i];
+        var wind = Math.round(d.windspeed_10m_max[i]*10)/10;
+        html += '<div class="weather-day">'
+          + '<div class="wd-date">'+mmdd+'（'+wday+'）</div>'
+          + '<div class="wd-icon">'+weatherEmoji(d.weathercode[i])+'</div>'
+          + '<div class="wd-temp">'+hi+'&deg;<span class="lo"> / '+lo+'&deg;</span></div>'
+          + '<div class="wd-pop">☔ '+pop+'%</div>'
+          + '<div class="wd-wind">🌬️ '+wind+'m/s</div>'
+          + '</div>';
+      }
+      grid.innerHTML = html;
+      if (loading) loading.style.display = 'none';
+    }).catch(function(err){
+      if (loading) loading.textContent = '天気情報を取得できませんでした（オフライン、または通信環境をご確認ください）。';
+    });
+  }
+
+  loadWeather();
 </script>
 </body>
 </html>
