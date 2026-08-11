@@ -222,6 +222,22 @@
   .weather-day .wd-wind{font-size:10.5px;color:var(--sub);margin-top:2px;}
   .weather-note{font-size:10.5px;color:var(--sub);margin-top:10px;}
 
+  .settlement-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .settlement-table{min-width:520px;font-size:12.5px;}
+  .settlement-table th{white-space:nowrap;background:var(--forest-soft);color:var(--forest);font-size:11px;padding:8px 10px;}
+  .settlement-table td{white-space:nowrap;padding:9px 10px;text-align:right;}
+  .settlement-table .settlement-name{text-align:left;font-weight:700;color:var(--ink);}
+  .settlement-table tr.settlement-total{font-weight:700;background:var(--sky-soft);}
+  .settlement-table tr.settlement-total td{color:var(--ink);}
+  .settlement-table tr.settlement-payee-header td{
+    border-top:2px solid var(--line);border-bottom:none;
+    font-size:10.5px;color:var(--sub);font-weight:700;letter-spacing:0.05em;
+    padding-top:14px;padding-bottom:2px;text-align:left;
+  }
+  .settlement-table tr.settlement-payee{background:var(--forest-soft);font-weight:700;}
+  .settlement-table tr.settlement-payee td{color:var(--forest);}
+  .settlement-table tr.settlement-payee .settlement-name{color:var(--forest);}
+
   .coming-soon-wrap{position:relative;}
   .coming-soon-blur{filter:blur(5px);opacity:0.55;pointer-events:none;user-select:none;}
   .coming-soon-badge{
@@ -355,9 +371,9 @@
     <div class="section-title"><span class="peak">▲</span>SCHEDULE <span class="title-ja">（スケジュール）</span></div>
 
     <div class="card">
-      <h2>INFORMATION <span class="n">直前確認</span></h2>
+      <h2>INFORMATION</h2>
       <ul class="checklist">
-        <li>ゼッケン（BIB）番号を確認する（MEMBERSページに掲載）</li>
+        <li>ゼッケン（BIB）番号を確認する（MEMBERSページに掲載／エントリーリスト公開は2026年8月28日頃と予想 ※昨年実績：大会9/7に対し8/22公開、今回の大会日9/13から同じ間隔で試算。公式発表で要確認）</li>
         <li>天気・降水確率・風を確認する（MAPページの週間天気）</li>
         <li>持ち物・必携装備を確認する（OTHERページ）</li>
         <li>集合時間・場所を確認する（9/12 7:30 新宿集合）</li>
@@ -421,38 +437,38 @@
         <div class="facilities">
           <div class="facility">
             <div class="fname">雪の荘（宿）</div>
-            <div class="faddr">北城5221／素泊まり</div>
-            <div class="fdo"><b>やること：</b>前泊チェックイン、朝食（支給）、前夜自炊、当日夕方まで荷物預かり</div>
+            <div class="faddr">〒399-9301 北城5221／素泊まり</div>
+            <div class="fdo"><b>Point：</b>前泊チェックイン、朝食（支給）、前夜自炊、当日夕方まで荷物預かり</div>
           </div>
           <div class="facility">
             <div class="fname">八方第二駐車場（会場）</div>
             <div class="faddr">大会本部・スタート/フィニッシュ</div>
-            <div class="fdo"><b>やること：</b>前日受付（ゼッケン・ICチップ・ココヘリ受け取り）、レース当日の集合・スタート・ゴール</div>
+            <div class="fdo"><b>Point：</b>前日受付（ゼッケン・ICチップ・ココヘリ受け取り）、レース当日の集合・スタート・ゴール</div>
           </div>
           <div class="facility">
             <div class="fname">ザ・ビッグ白馬店</div>
-            <div class="faddr">北城1007／9:00-22:00</div>
-            <div class="fdo"><b>やること：</b>前夜ご飯の食材調達</div>
+            <div class="faddr">〒399-9301 北城1007／9:00-22:00</div>
+            <div class="fdo"><b>Point：</b>前夜ご飯の食材調達</div>
           </div>
           <div class="facility">
             <div class="fname">TABITABI Gelato & Dessert</div>
-            <div class="faddr">北城3020-1406／11:00-18:00</div>
-            <div class="fdo"><b>やること：</b>散策ジョグの休憩でジェラート</div>
+            <div class="faddr">〒399-9301 北城3020-1406／11:00-18:00</div>
+            <div class="fdo"><b>Point：</b>散策ジョグの休憩でジェラート</div>
           </div>
           <div class="facility">
             <div class="fname">松川（白馬大橋周辺）</div>
             <div class="faddr">駐車スペースあり</div>
-            <div class="fdo"><b>やること：</b>散策ジョグ中に川遊びで涼む</div>
+            <div class="fdo"><b>Point：</b>散策ジョグ中に川遊びで涼む</div>
           </div>
           <div class="facility">
             <div class="fname">みみずくの湯 <span style="font-size:10.5px;color:var(--forest);font-weight:700;">（本命）</span></div>
-            <div class="faddr">北城八方口5480-1／10:00-21:00・800円</div>
-            <div class="fdo"><b>やること：</b>レース後に汗を流す</div>
+            <div class="faddr">〒399-9301 北城八方口5480-1／10:00-21:00・800円</div>
+            <div class="fdo"><b>Point：</b>レース後に汗を流す</div>
           </div>
           <div class="facility">
             <div class="fname">八方の湯</div>
-            <div class="faddr">北城5701-2／10:00-21:00・1,000円</div>
-            <div class="fdo"><b>やること：</b>レース後に汗を流す（みみずくの湯が難しい場合の予備）</div>
+            <div class="faddr">〒399-9301 北城5701-2／10:00-21:00・1,000円</div>
+            <div class="fdo"><b>Point：</b>レース後に汗を流す（みみずくの湯が難しい場合の予備）</div>
           </div>
         </div>
       </div>
@@ -545,22 +561,32 @@
     <div class="section-title"><span class="peak">▲</span>SETTLEMENT <span class="title-ja">（精算）</span></div>
     <div class="card">
       <h2>費用精算</h2>
-      <div class="map-note">宿泊費・ガソリン代・高速代などの立て替え分をまとめて精算するページです。領収書がそろい次第、内訳と一人あたりの精算額を更新します。</div>
+      <div class="map-note">縦：メンバー／横：勘定項目のマトリクスです。金額が確定し次第、このフレームに数字をうめていきます。</div>
 
-      <div class="coming-soon-wrap">
-        <div class="coming-soon-badge"><span>Coming Soon!</span></div>
-        <div class="coming-soon-blur">
-          <table>
-            <tr><th>項目</th><th>金額</th><th>立替者</th><th>備考</th></tr>
-            <tr><td>宿泊費（雪の荘）</td><td>¥0</td><td>-</td><td>5人分・素泊まり</td></tr>
-            <tr><td>ガソリン代</td><td>¥0</td><td>Go</td><td>車移動の場合のみ</td></tr>
-            <tr><td>高速代</td><td>¥0</td><td>Go</td><td>車移動の場合のみ</td></tr>
-            <tr><td>前夜ご飯 食材（ザ・ビッグ白馬店）</td><td>¥0</td><td>-</td><td>買い出し担当分</td></tr>
-            <tr><td>温泉（みみずくの湯）</td><td>¥0</td><td>各自</td><td>各自精算</td></tr>
-          </table>
-          <div class="pattern-note" style="margin-top:14px;">一人あたり精算額：計算中</div>
-        </div>
+      <div class="settlement-table-wrap">
+        <table class="settlement-table">
+          <tr>
+            <th>メンバー</th>
+            <th>宿泊費</th>
+            <th>ガソリン代</th>
+            <th>高速代</th>
+            <th>食材費</th>
+            <th>温泉</th>
+            <th>合計負担額</th>
+          </tr>
+          <tr><td class="settlement-name">Go</td><td>¥5,500</td><td>¥0</td><td>¥2,060</td><td>¥0</td><td>¥0</td><td>¥7,560</td></tr>
+          <tr><td class="settlement-name">Hirono</td><td>¥5,500</td><td>¥0</td><td>¥2,060</td><td>¥0</td><td>¥0</td><td>¥7,560</td></tr>
+          <tr><td class="settlement-name">Nat</td><td>¥5,500</td><td>¥0</td><td>¥2,060</td><td>¥0</td><td>¥0</td><td>¥7,560</td></tr>
+          <tr><td class="settlement-name">Junsuke</td><td>¥5,500</td><td>¥0</td><td>¥2,060</td><td>¥0</td><td>¥0</td><td>¥7,560</td></tr>
+          <tr><td class="settlement-name">Hina</td><td>¥5,500</td><td>¥0</td><td>¥2,060</td><td>¥0</td><td>¥0</td><td>¥7,560</td></tr>
+          <tr class="settlement-total"><td>合計</td><td>¥27,500</td><td>¥0</td><td>¥10,300</td><td>¥0</td><td>¥0</td><td>¥37,800</td></tr>
+          <tr class="settlement-payee-header"><td colspan="7">支払先別 精算額</td></tr>
+          <tr class="settlement-payee"><td class="settlement-name">→ GO へ</td><td>-</td><td>¥0</td><td>¥10,300</td><td>-</td><td>-</td><td>¥10,300</td></tr>
+          <tr class="settlement-payee"><td class="settlement-name">→ Hirono へ</td><td>¥27,500</td><td>-</td><td>-</td><td>¥0</td><td>-</td><td>¥27,500</td></tr>
+        </table>
       </div>
+
+      <div class="pattern-note" style="margin-top:14px;">高速代：新宿（高井戸IC）⇔安曇野IC（中央道＋長野道、ETC普通車想定）片道¥5,150 × 往復 = ¥10,300 を5人で均等按分（¥2,060／人）。宿泊費：雪の荘 ¥5,500／人。表の下2行は「誰にいくら払えばいいか」の精算先別の合計です。</div>
     </div>
   </section>
 
@@ -641,10 +667,8 @@
       <h2>注意事項</h2>
       <ul class="checklist">
         <li>キャンセルは理由問わず返金なし（大会中止時も返金対象外）</li>
-        <li>55歳以上のメンバーは事前の健康診断が必須（対象者要確認）</li>
         <li>熱中症は大会保険の対象外のため、個人での保険加入を検討</li>
         <li>個人でココヘリ会員の場合、エントリー時にIDを記入すると-1,000円</li>
-        <li>コース試走は登山道以外原則禁止（スキー場・MTBコース等は不可）</li>
       </ul>
     </div>
 
