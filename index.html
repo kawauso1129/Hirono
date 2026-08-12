@@ -154,6 +154,7 @@
   /* checklist */
   .checklist{list-style:none;padding:0;margin:0;font-size:13px;line-height:2;}
   .checklist li:before{content:"⛰ ";color:var(--wood);}
+  .info-date{display:inline-block;min-width:98px;font-weight:700;color:var(--forest);margin-right:4px;}
 
   /* map */
   #map{width:100%;height:440px;border-radius:12px;border:1px solid var(--line);}
@@ -373,10 +374,11 @@
     <div class="card">
       <h2>INFORMATION</h2>
       <ul class="checklist">
-        <li>ゼッケン（BIB）番号を確認する（MEMBERSページに掲載／エントリーリスト公開は2026年8月28日頃と予想 ※昨年実績：大会9/7に対し8/22公開、今回の大会日9/13から同じ間隔で試算。公式発表で要確認）</li>
-        <li>天気・降水確率・風を確認する（MAPページの週間天気）</li>
-        <li>持ち物・必携装備を確認する（OTHERページ）</li>
-        <li>集合時間・場所を確認する（9/12 7:30 新宿集合）</li>
+        <li><span class="info-date">2026/08/28</span>ゼッケン（BIB）番号を確認する：MEMBERSページに掲載</li>
+        <li><span class="info-date">2026/09/06〜</span>天気・降水確率・風を確認する：MAPページの週間天気</li>
+        <li><span class="info-date">2026/09/08〜</span>持ち物・必携装備を確認する：OTHERページ</li>
+        <li><span class="info-date">2026/09/11</span>荷造りをする：ザック・ウェア・行動食など最終チェック</li>
+        <li><span class="info-date">2026/09/12</span>集合時間・場所を確認する：7:30 新宿集合</li>
       </ul>
     </div>
 
@@ -503,6 +505,7 @@
           <svg id="elev-chart" viewBox="0 0 900 320" style="width:100%;height:auto;display:block;"></svg>
           <div id="elev-tooltip" class="elev-tooltip"></div>
         </div>
+        <div class="map-note" style="margin-top:6px;">▲ マークがエイドステーション位置（各コースの色に対応・グラフ上にマウスを乗せると名称／距離／標高を表示）。</div>
 
         <div class="facilities" style="margin-top:18px;">
           <div class="facility">
@@ -574,11 +577,11 @@
             <th>温泉</th>
             <th>合計負担額</th>
           </tr>
-          <tr><td class="settlement-name">Go</td><td>¥5,500</td><td>¥0</td><td>¥2,060</td><td>¥0</td><td>¥0</td><td>¥7,560</td></tr>
-          <tr><td class="settlement-name">Hirono</td><td>¥5,500</td><td>¥0</td><td>¥2,060</td><td>¥0</td><td>¥0</td><td>¥7,560</td></tr>
-          <tr><td class="settlement-name">Nat</td><td>¥5,500</td><td>¥0</td><td>¥2,060</td><td>¥0</td><td>¥0</td><td>¥7,560</td></tr>
-          <tr><td class="settlement-name">Junsuke</td><td>¥5,500</td><td>¥0</td><td>¥2,060</td><td>¥0</td><td>¥0</td><td>¥7,560</td></tr>
-          <tr><td class="settlement-name">Hina</td><td>¥5,500</td><td>¥0</td><td>¥2,060</td><td>¥0</td><td>¥0</td><td>¥7,560</td></tr>
+          <tr><td class="settlement-name">Go</td><td>¥5,500</td><td>¥0</td><td>¥0</td><td>¥0</td><td>¥0</td><td>¥5,500</td></tr>
+          <tr><td class="settlement-name">Hirono</td><td>¥5,500</td><td>¥0</td><td>¥2,575</td><td>¥0</td><td>¥0</td><td>¥8,075</td></tr>
+          <tr><td class="settlement-name">Nat</td><td>¥5,500</td><td>¥0</td><td>¥2,575</td><td>¥0</td><td>¥0</td><td>¥8,075</td></tr>
+          <tr><td class="settlement-name">Junsuke</td><td>¥5,500</td><td>¥0</td><td>¥2,575</td><td>¥0</td><td>¥0</td><td>¥8,075</td></tr>
+          <tr><td class="settlement-name">Hina</td><td>¥5,500</td><td>¥0</td><td>¥2,575</td><td>¥0</td><td>¥0</td><td>¥8,075</td></tr>
           <tr class="settlement-total"><td>合計</td><td>¥27,500</td><td>¥0</td><td>¥10,300</td><td>¥0</td><td>¥0</td><td>¥37,800</td></tr>
           <tr class="settlement-payee-header"><td colspan="7">支払先別 精算額</td></tr>
           <tr class="settlement-payee"><td class="settlement-name">→ GO へ</td><td>-</td><td>¥0</td><td>¥10,300</td><td>-</td><td>-</td><td>¥10,300</td></tr>
@@ -586,7 +589,7 @@
         </table>
       </div>
 
-      <div class="pattern-note" style="margin-top:14px;">高速代：新宿（高井戸IC）⇔安曇野IC（中央道＋長野道、ETC普通車想定）片道¥5,150 × 往復 = ¥10,300 を5人で均等按分（¥2,060／人）。宿泊費：雪の荘 ¥5,500／人。表の下2行は「誰にいくら払えばいいか」の精算先別の合計です。</div>
+      <div class="pattern-note" style="margin-top:14px;">高速代：新宿（高井戸IC）⇔安曇野IC（中央道＋長野道、ETC普通車想定）片道¥5,150 × 往復 = ¥10,300 を、運転しないGoを除く4人で均等按分（¥2,575／人）。宿泊費：雪の荘 ¥5,500／人。表の下2行は「誰にいくら払えばいいか」の精算先別の合計です。</div>
     </div>
   </section>
 
@@ -758,6 +761,11 @@
   };
   var COURSE_COLORS = {"50":"#1a7a4c","29":"#1f6fb0","12":"#c9701f"};
   var COURSE_LABELS = {"50":"50km","29":"29km","12":"12km"};
+  var AID = {
+    "50": [[6.5,'A1','岩岳チャバティ'],[13.5,'A2','おかるの穴'],[23.5,'A3','大出公園（関門13:00）'],[36,'A4','白馬グリーンスポーツの森'],[43,'A5','こくいち'],[45,'A6','パノラマ']],
+    "29": [[6.5,'A1','岩岳チャバティ'],[13.5,'A2','おかるの穴'],[20,'A3','こくいち'],[22,'A4','パノラマ①'],[25.5,'A4','パノラマ②']],
+    "12": [[6.5,'A1','岩岳チャバティ']]
+  };
 
   function initCourseMap(){
     var cm = L.map('coursemap-map', {scrollWheelZoom:false});
@@ -827,6 +835,24 @@
       var lbl = el('text', {x: lx2, y: ly-6, 'font-size':11, fill:COURSE_COLORS[key], 'font-weight':700, 'text-anchor':anchor});
       lbl.textContent = COURSE_LABELS[key];
       svg.appendChild(lbl);
+    });
+
+    // aid station markers
+    ['50','29','12'].forEach(function(key){
+      AID[key].forEach(function(a){
+        var aDist = a[0], aCode = a[1], aName = a[2];
+        var aElev = elevAt(key, aDist);
+        if (aElev === null) return;
+        var ax = xScale(aDist), ay = yScale(aElev);
+        var tri = el('path', {d:'M'+ax+','+(ay-11)+' L'+(ax-4)+','+(ay-4)+' L'+(ax+4)+','+(ay-4)+' Z', fill:COURSE_COLORS[key], stroke:'#fff', 'stroke-width':1});
+        var ttl = el('title', {});
+        ttl.textContent = COURSE_LABELS[key]+' '+aCode+' '+aName+'（'+aDist+'km／標高約'+Math.round(aElev)+'m）';
+        tri.appendChild(ttl);
+        svg.appendChild(tri);
+        var lbl2 = el('text', {x:ax, y:ay-14, 'font-size':8, fill:COURSE_COLORS[key], 'font-weight':700, 'text-anchor':'middle'});
+        lbl2.textContent = aCode;
+        svg.appendChild(lbl2);
+      });
     });
 
     // shared start marker
