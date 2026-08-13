@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>白馬クラシックトレイル2026 | チーム記録ページ</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232f5c46'/%3E%3Cpath d='M3 19 L9 8 L12 12.5 L14 10 L21 19 Z' fill='%23fdfbf4'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,9 +21,13 @@
     --sky:#4d7ea8;
     --sky-soft:#e5eef4;
     --wood:#a35d3c;
+    --wood-soft:#f3e6db;
     --sunrise:#d98c3d;
+    --sunrise-soft:#faead9;
     --dusk:#6a5088;
+    --dusk-soft:#ece7f2;
     --stone:#8a8470;
+    --stone-soft:#ece7da;
   }
   *{box-sizing:border-box;}
   body{
@@ -34,6 +39,35 @@
     font-family:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",-apple-system,BlinkMacSystemFont,sans-serif;
     padding:0 0 60px;
   }
+  ::-webkit-scrollbar{width:10px;height:10px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:var(--line);border-radius:10px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--wood);}
+
+  /* ---- mountain icon motif ---- */
+  .icon-mtn{width:1em;height:1em;display:inline-block;vertical-align:-0.14em;flex:0 0 auto;}
+  .icon-badge{
+    display:inline-flex;align-items:center;justify-content:center;
+    border-radius:50%;flex:0 0 auto;
+  }
+  .icon-badge svg{width:56%;height:56%;}
+  .icon-badge.ib-forest{background:var(--forest-soft);color:var(--forest);}
+  .icon-badge.ib-sky{background:var(--sky-soft);color:var(--sky);}
+  .icon-badge.ib-wood{background:var(--wood-soft);color:var(--wood);}
+  .icon-badge.ib-sunrise{background:var(--sunrise-soft);color:var(--sunrise);}
+  .icon-badge.ib-dusk{background:var(--dusk-soft);color:var(--dusk);}
+  .icon-badge.ib-stone{background:var(--stone-soft);color:var(--stone);}
+
+  .back-to-top{
+    position:fixed;right:16px;bottom:18px;width:46px;height:46px;border-radius:50%;
+    background:linear-gradient(135deg,var(--forest),#3f7362);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 14px rgba(47,92,70,0.35);
+    text-decoration:none;z-index:20;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .back-to-top svg{width:19px;height:19px;}
+  .back-to-top:hover{transform:translateY(-3px) scale(1.06);box-shadow:0 6px 18px rgba(47,92,70,0.45);}
 
   /* ---- hero with photo background ---- */
   .hero{
@@ -90,10 +124,14 @@
   }
   .nav a{
     font-size:12px;color:var(--forest);text-decoration:none;font-weight:700;letter-spacing:0.03em;
-    padding:6px 13px;border-radius:999px;background:#fff;border:1px solid var(--line);
+    padding:7px 14px 7px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);
+    display:inline-flex;align-items:center;gap:5px;
+    transition:transform .16s ease, box-shadow .16s ease, background .16s ease, border-color .16s ease;
   }
   .nav a .ja{font-size:10px;color:var(--sub);font-weight:500;margin-left:2px;}
-  .nav a:hover{background:var(--forest-soft);}
+  .nav a .nav-ic{color:var(--wood);width:12px;height:12px;transition:color .16s ease;}
+  .nav a:hover{background:var(--forest-soft);border-color:var(--forest);transform:translateY(-2px);box-shadow:0 4px 10px rgba(47,92,70,0.16);}
+  .nav a:hover .nav-ic{color:var(--forest);}
 
   .wrap{max-width:920px;margin:0 auto;padding:0 16px;}
   section{scroll-margin-top:56px;}
@@ -103,9 +141,7 @@
     display:flex;align-items:center;gap:8px;
   }
   .section-title:first-of-type{margin-top:24px;}
-  .section-title .peak{
-    font-size:11px;color:var(--wood);
-  }
+  .section-title .peak-badge{width:25px;height:25px;}
   .section-title .title-ja{
     font-size:12.5px;color:var(--sub);letter-spacing:0.06em;font-weight:500;
   }
@@ -153,7 +189,13 @@
 
   /* checklist */
   .checklist{list-style:none;padding:0;margin:0;font-size:13px;line-height:2;}
-  .checklist li:before{content:"⛰ ";color:var(--wood);}
+  .checklist li{position:relative;padding-left:22px;}
+  .checklist li:before{
+    content:'';position:absolute;left:0;top:0.6em;width:13px;height:13px;
+    background:var(--wood);
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M1 19 L8 7 L11.5 12.5 L14 9 L23 19 Z'/%3E%3C/svg%3E") center/contain no-repeat;
+    mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M1 19 L8 7 L11.5 12.5 L14 9 L23 19 Z'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
   .info-date{display:inline-block;min-width:98px;font-weight:700;color:var(--forest);margin-right:4px;}
 
   /* map */
@@ -192,20 +234,30 @@
     margin-top:14px;padding:16px 20px;border-radius:14px;text-decoration:none;
     background:linear-gradient(120deg,var(--forest),#3f7362);
     color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.08);
-    transition:opacity 0.15s ease;
+    transition:opacity 0.15s ease, transform .15s ease;
   }
-  .official-banner:hover{opacity:0.92;}
+  .official-banner:hover{opacity:0.92;transform:translateY(-2px);}
+  .official-banner-main{display:flex;align-items:center;gap:12px;}
+  .official-banner-icon{
+    width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.18);
+    display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+  }
+  .official-banner-icon svg{width:60%;height:60%;color:#fff;}
   .official-banner-eyebrow{font-size:10.5px;letter-spacing:0.14em;opacity:0.85;margin-bottom:4px;}
   .official-banner-title{font-size:14.5px;font-weight:700;}
   .official-banner-arrow{font-size:20px;flex:0 0 auto;}
 
   .schedule-toggle{display:flex;gap:8px;margin-bottom:16px;}
   .schedule-toggle button{
-    flex:1;padding:10px 12px;border-radius:10px;border:1px solid var(--line);
+    flex:1;padding:10px 14px;border-radius:999px;border:1px solid var(--line);
     background:#fdfbf4;color:var(--sub);font-size:13px;font-weight:700;cursor:pointer;
-    font-family:inherit;
+    font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    transition:all .18s ease;
   }
-  .schedule-toggle button.active{background:var(--forest);color:#fff;border-color:var(--forest);}
+  .schedule-toggle button svg{width:13px;height:13px;color:var(--wood);transition:color .18s ease;}
+  .schedule-toggle button:hover:not(.active){background:var(--forest-soft);border-color:var(--forest);}
+  .schedule-toggle button.active{background:linear-gradient(135deg,var(--forest),#3f7362);color:#fff;border-color:var(--forest);box-shadow:0 3px 10px rgba(47,92,70,0.25);}
+  .schedule-toggle button.active svg{color:#fff;}
   .schedule-pattern{display:none;}
   .schedule-pattern.active{display:block;}
   .pattern-note{font-size:11.5px;color:var(--sub);background:var(--sky-soft);border-radius:10px;padding:9px 12px;margin-bottom:14px;line-height:1.6;}
@@ -285,6 +337,15 @@
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute;overflow:hidden;" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="icon-mtn" viewBox="0 0 24 24">
+      <path d="M1 19 L8 7 L11.5 12.5 L14 9 L23 19 Z" fill="currentColor"/>
+      <path d="M8 7 L9.3 9.2 L6.9 9.4 Z" fill="#fff" opacity="0.55"/>
+    </symbol>
+  </defs>
+</svg>
+
 <div class="hero">
   <div class="hero-photo"></div>
   <div class="hero-overlay"></div>
@@ -298,88 +359,40 @@
 </div>
 
 <div class="nav">
-  <a href="#overview">RACE OVERVIEW<span class="ja">（レース概要）</span></a>
-  <a href="#schedule">SCHEDULE<span class="ja">（スケジュール）</span></a>
-  <a href="#area">MAP<span class="ja">（マップ）</span></a>
-  <a href="#event">EVENT INFO<span class="ja">（イベント情報）</span></a>
-  <a href="#settlement">SETTLEMENT<span class="ja">（精算）</span></a>
-  <a href="#etc">OTHER<span class="ja">（そのほか）</span></a>
+  <a href="#overview"><svg class="icon-mtn nav-ic"><use href="#icon-mtn"/></svg>RACE OVERVIEW<span class="ja">（レース概要）</span></a>
+  <a href="#schedule"><svg class="icon-mtn nav-ic"><use href="#icon-mtn"/></svg>SCHEDULE<span class="ja">（スケジュール）</span></a>
+  <a href="#area"><svg class="icon-mtn nav-ic"><use href="#icon-mtn"/></svg>MAP<span class="ja">（マップ）</span></a>
+  <a href="#event"><svg class="icon-mtn nav-ic"><use href="#icon-mtn"/></svg>EVENT INFO<span class="ja">（イベント情報）</span></a>
+  <a href="#settlement"><svg class="icon-mtn nav-ic"><use href="#icon-mtn"/></svg>SETTLEMENT<span class="ja">（精算）</span></a>
+  <a href="#etc"><svg class="icon-mtn nav-ic"><use href="#icon-mtn"/></svg>OTHER<span class="ja">（そのほか）</span></a>
 </div>
 
 <div class="wrap">
 
+  <div class="card" id="changelog-card" style="margin-top:14px;">
+    <h2 style="margin-bottom:10px;"><span class="icon-badge ib-forest" style="width:22px;height:22px;"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>更新履歴<span class="n" id="changelog-count"></span></h2>
+    <ul class="checklist" id="changelog-list" style="font-size:12.5px;line-height:1.9;"></ul>
+  </div>
+
   <section id="overview">
-    <div class="section-title"><span class="peak">▲</span>RACE OVERVIEW <span class="title-ja">（レース概要）</span></div>
+    <div class="section-title"><span class="peak-badge icon-badge ib-forest"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>RACE OVERVIEW <span class="title-ja">（レース概要）</span></div>
     <div class="card">
-      <h2>RACE INFO</h2>
-      <div class="info-grid">
-        <div class="info-item"><div class="label">RACE NAME</div><div class="value">Hakuba International Classic<br><span style="font-size:11px;color:var(--sub);font-weight:500;">白馬国際クラシック</span></div></div>
-        <div class="info-item"><div class="label">DATE</div><div class="value">Sun, Sep 13, 2026</div></div>
-        <div class="info-item"><div class="label">PRE-RACE CHECK-IN</div><div class="value">Sat, Sep 12 ／ 12:00–17:00</div></div>
-        <div class="info-item"><div class="label">VENUE</div><div class="value">Happo Dai-ni Parking<br><span style="font-size:11px;color:var(--sub);font-weight:500;">八方第二駐車場</span></div></div>
-        <div class="info-item"><div class="label">LODGING</div><div class="value">Yuki no Sou (room only)<br><span style="font-size:11px;color:var(--sub);font-weight:500;">雪の荘（素泊まり）</span></div></div>
-      </div>
+      <h2><span class="icon-badge ib-forest" style="width:24px;height:24px;"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>RACE INFO</h2>
+      <div class="info-grid" id="race-info-grid"></div>
     </div>
 
     <div class="card">
-      <h2>MEMBERS <span class="n">5</span></h2>
-      <div class="members">
-        <div class="member">
-          <span class="course c50">50km</span>
-          <div class="name">Go</div>
-          <div class="meta">Start 7:00 ／ Cutoff 18:00</div>
-          <div class="bib">BIB No: Coming Soon!</div>
-          <div class="prev">Previous Result: Not yet recorded</div>
-          <div class="result">Result: To be updated after the race</div>
-        </div>
-        <div class="member">
-          <span class="course c29">29km</span>
-          <div class="name">Hirono</div>
-          <div class="meta">Start 8:30 ／ Cutoff 16:00</div>
-          <div class="bib">BIB No: Coming Soon!</div>
-          <div class="prev">Previous Result: 2025 29km, 6:30:00</div>
-          <div class="result">Result: To be updated after the race</div>
-        </div>
-        <div class="member">
-          <span class="course c29">29km</span>
-          <div class="name">Nat</div>
-          <div class="meta">Start 8:30 ／ Cutoff 16:00</div>
-          <div class="bib">BIB No: Coming Soon!</div>
-          <div class="prev">Previous Result: 2024 50km Trail, 7:53:27</div>
-          <div class="result">Result: To be updated after the race</div>
-        </div>
-        <div class="member">
-          <span class="course c12">12km</span>
-          <div class="name">Junsuke</div>
-          <div class="meta">Start 9:00 ／ Cutoff 13:00</div>
-          <div class="bib">BIB No: Coming Soon!</div>
-          <div class="prev">Previous Result: Not yet recorded</div>
-          <div class="result">Result: To be updated after the race</div>
-        </div>
-        <div class="member">
-          <span class="course c12">12km</span>
-          <div class="name">Hina</div>
-          <div class="meta">Start 9:00 ／ Cutoff 13:00</div>
-          <div class="bib">BIB No: Coming Soon!</div>
-          <div class="prev">Previous Result: Not yet recorded</div>
-          <div class="result">Result: To be updated after the race</div>
-        </div>
-      </div>
+      <h2><span class="icon-badge ib-forest" style="width:24px;height:24px;"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>MEMBERS <span class="n" id="members-count"></span></h2>
+      <div class="members" id="members-grid"></div>
     </div>
   </section>
 
   <section id="schedule">
-    <div class="section-title"><span class="peak">▲</span>SCHEDULE <span class="title-ja">（スケジュール）</span></div>
+    <div class="section-title"><span class="peak-badge icon-badge ib-sky"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>SCHEDULE <span class="title-ja">（スケジュール）</span></div>
 
     <div class="card">
-      <h2>INFORMATION</h2>
-      <ul class="checklist">
-        <li><span class="info-date">2026/08/28</span>ゼッケン（BIB）番号を確認する：MEMBERSページに掲載</li>
-        <li><span class="info-date">2026/09/06〜</span>天気・降水確率・風を確認する：MAPページの週間天気</li>
-        <li><span class="info-date">2026/09/08〜</span>持ち物・必携装備を確認する：OTHERページ</li>
-        <li><span class="info-date">2026/09/11</span>荷造りをする：ザック・ウェア・行動食など最終チェック</li>
-        <li><span class="info-date">2026/09/12</span>集合時間・場所を確認する：7:30 新宿集合</li>
-      </ul>
+      <h2><span class="icon-badge ib-sky" style="width:24px;height:24px;"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>INFORMATION</h2>
+      <ul class="checklist" id="info-checklist"></ul>
     </div>
 
     <div class="card">
@@ -418,11 +431,11 @@
   </section>
 
   <section id="area">
-    <div class="section-title"><span class="peak">▲</span>MAP <span class="title-ja">（マップ）</span></div>
+    <div class="section-title"><span class="peak-badge icon-badge ib-wood"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>MAP <span class="title-ja">（マップ）</span></div>
     <div class="card">
       <div class="schedule-toggle">
-        <button id="btn-areainfo" class="active" onclick="showMapTab('areainfo')">エリア情報</button>
-        <button id="btn-coursemap" onclick="showMapTab('coursemap')">コースマップ</button>
+        <button id="btn-areainfo" class="active" onclick="showMapTab('areainfo')"><svg class="icon-mtn"><use href="#icon-mtn"/></svg>エリア情報</button>
+        <button id="btn-coursemap" onclick="showMapTab('coursemap')"><svg class="icon-mtn"><use href="#icon-mtn"/></svg>コースマップ</button>
       </div>
 
       <div id="tab-areainfo" class="schedule-pattern active">
@@ -525,9 +538,9 @@
     </div></section>
 
   <section id="event">
-    <div class="section-title"><span class="peak">▲</span>EVENT INFO <span class="title-ja">（イベント情報）</span></div>
+    <div class="section-title"><span class="peak-badge icon-badge ib-sunrise"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>EVENT INFO <span class="title-ja">（イベント情報）</span></div>
     <div class="card">
-      <h2>前日ジョグのランルート</h2>
+      <h2><span class="icon-badge ib-sunrise" style="width:24px;height:24px;"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>前日ジョグのランルート</h2>
       <div class="coming-soon-wrap">
         <div class="coming-soon-badge"><span>Coming Soon!</span></div>
         <div class="coming-soon-blur">
@@ -545,7 +558,7 @@
         </div>
       </div>
 
-      <h2 style="margin-top:26px;">前日晩ごはん</h2>
+      <h2 style="margin-top:26px;"><span class="icon-badge ib-sunrise" style="width:24px;height:24px;"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>前日晩ごはん</h2>
       <div class="coming-soon-wrap">
         <div class="coming-soon-badge"><span>Coming Soon!</span></div>
         <div class="coming-soon-blur">
@@ -561,71 +574,39 @@
   </section>
 
   <section id="settlement">
-    <div class="section-title"><span class="peak">▲</span>SETTLEMENT <span class="title-ja">（精算）</span></div>
+    <div class="section-title"><span class="peak-badge icon-badge ib-dusk"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>SETTLEMENT <span class="title-ja">（精算）</span></div>
     <div class="card">
-      <h2>費用精算</h2>
+      <h2><span class="icon-badge ib-dusk" style="width:24px;height:24px;"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>費用精算</h2>
       <div class="map-note">縦：メンバー／横：勘定項目のマトリクスです。金額が確定し次第、このフレームに数字をうめていきます。</div>
 
       <div class="settlement-table-wrap">
-        <table class="settlement-table">
-          <tr>
-            <th>メンバー</th>
-            <th>宿泊費</th>
-            <th>ガソリン代</th>
-            <th>高速代</th>
-            <th>食材費</th>
-            <th>温泉</th>
-            <th>合計負担額</th>
-          </tr>
-          <tr><td class="settlement-name">Go</td><td>¥5,500</td><td>¥0</td><td>¥0</td><td>¥0</td><td>¥0</td><td>¥5,500</td></tr>
-          <tr><td class="settlement-name">Hirono</td><td>¥5,500</td><td>¥0</td><td>¥2,575</td><td>¥0</td><td>¥0</td><td>¥8,075</td></tr>
-          <tr><td class="settlement-name">Nat</td><td>¥5,500</td><td>¥0</td><td>¥2,575</td><td>¥0</td><td>¥0</td><td>¥8,075</td></tr>
-          <tr><td class="settlement-name">Junsuke</td><td>¥5,500</td><td>¥0</td><td>¥2,575</td><td>¥0</td><td>¥0</td><td>¥8,075</td></tr>
-          <tr><td class="settlement-name">Hina</td><td>¥5,500</td><td>¥0</td><td>¥2,575</td><td>¥0</td><td>¥0</td><td>¥8,075</td></tr>
-          <tr class="settlement-total"><td>合計</td><td>¥27,500</td><td>¥0</td><td>¥10,300</td><td>¥0</td><td>¥0</td><td>¥37,800</td></tr>
-          <tr class="settlement-payee-header"><td colspan="7">支払先別 精算額</td></tr>
-          <tr class="settlement-payee"><td class="settlement-name">→ GO へ</td><td>-</td><td>¥0</td><td>¥10,300</td><td>-</td><td>-</td><td>¥10,300</td></tr>
-          <tr class="settlement-payee"><td class="settlement-name">→ Hirono へ</td><td>¥27,500</td><td>-</td><td>-</td><td>¥0</td><td>-</td><td>¥27,500</td></tr>
-        </table>
+        <table class="settlement-table" id="settlement-table"></table>
       </div>
 
-      <div class="pattern-note" style="margin-top:14px;">高速代：新宿（高井戸IC）⇔安曇野IC（中央道＋長野道、ETC普通車想定）片道¥5,150 × 往復 = ¥10,300 を、運転しないGoを除く4人で均等按分（¥2,575／人）。宿泊費：雪の荘 ¥5,500／人。表の下2行は「誰にいくら払えばいいか」の精算先別の合計です。</div>
+      <div class="pattern-note" id="settlement-note" style="margin-top:14px;"></div>
     </div>
   </section>
 
   <section id="etc">
-    <div class="section-title"><span class="peak">▲</span>OTHER <span class="title-ja">（そのほか）</span></div>
+    <div class="section-title"><span class="peak-badge icon-badge ib-stone"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>OTHER <span class="title-ja">（そのほか）</span></div>
 
     <div class="card">
-      <h2>リンク集</h2>
+      <h2><span class="icon-badge ib-stone" style="width:24px;height:24px;"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>リンク集</h2>
       <a href="https://s-mountain.com/hakuba/" target="_blank" rel="noopener" class="official-banner">
-        <div class="official-banner-text">
-          <div class="official-banner-eyebrow">HAKUBA CLASSIC INTERNATIONAL</div>
-          <div class="official-banner-title">白馬国際クラシック 公式サイトを見る</div>
+        <div class="official-banner-main">
+          <div class="official-banner-icon"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></div>
+          <div class="official-banner-text">
+            <div class="official-banner-eyebrow">HAKUBA CLASSIC INTERNATIONAL</div>
+            <div class="official-banner-title">白馬国際クラシック 公式サイトを見る</div>
+          </div>
         </div>
         <div class="official-banner-arrow">→</div>
       </a>
-      <div class="facilities" style="margin-top:14px;">
-        <div class="facility">
-          <div class="fname">雪の荘（宿）公式ページ</div>
-          <div class="faddr">白馬村観光局サイト内・源泉：白馬八方温泉／朝食無料</div>
-          <div class="fdo"><a href="https://www.vill.hakuba.nagano.jp/stay/happo/864.html" target="_blank" rel="noopener">ページを見る →</a></div>
-        </div>
-        <div class="facility">
-          <div class="fname">TABITABI Sakura Farm（Instagram）</div>
-          <div class="faddr">ジェラート・デザート</div>
-          <div class="fdo"><a href="https://www.instagram.com/tabitabi_sakurafarm/" target="_blank" rel="noopener">Instagramを見る →</a></div>
-        </div>
-        <div class="facility">
-          <div class="fname">雨雲レーダー（気象庁 高解像度降水ナウキャスト）</div>
-          <div class="faddr">白馬村付近を中心表示</div>
-          <div class="fdo"><a href="https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:36.6975/lon:137.8480/colordepth:normal/elements:hrpns" target="_blank" rel="noopener">レーダーを見る →</a></div>
-        </div>
-      </div>
+      <div class="facilities" style="margin-top:14px;" id="links-facilities"></div>
     </div>
 
     <div class="card">
-      <h2>参考：電車移動の場合のスケジュール（あずさ利用）</h2>
+      <h2><span class="icon-badge ib-stone" style="width:24px;height:24px;"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>参考：電車移動の場合のスケジュール（あずさ利用）</h2>
       <div class="map-note">現在のメインプランは車移動（Go's Car）ですが、参考用に電車利用時のスケジュールも残しておきます。</div>
 
       <span class="day-label">9/12（土）前泊day</span>
@@ -658,7 +639,7 @@
     </div>
 
     <div class="card">
-      <h2>持ち物・必携装備</h2>
+      <h2><span class="icon-badge ib-stone" style="width:24px;height:24px;"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>持ち物・必携装備</h2>
       <ul class="checklist">
         <li>50km（Go）：ゼッケン・ICチップ・ココヘリ発信機（前日受付で配布）・GPS機能付き時計orスマホ・ライト（予備電池）・防水レインジャケット・熊鈴・ドリンク500ml以上・携帯カップ</li>
         <li>29km（Hirono・Nat）：ゼッケン・ICチップ・ココヘリ発信機（前日受付で配布）・GPS機能付き時計orスマホ</li>
@@ -667,7 +648,7 @@
     </div>
 
     <div class="card">
-      <h2>注意事項</h2>
+      <h2><span class="icon-badge ib-stone" style="width:24px;height:24px;"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>注意事項</h2>
       <ul class="checklist">
         <li>キャンセルは理由問わず返金なし（大会中止時も返金対象外）</li>
         <li>熱中症は大会保険の対象外のため、個人での保険加入を検討</li>
@@ -676,16 +657,169 @@
     </div>
 
     <div class="card">
-      <h2>結果・振り返り</h2>
+      <h2><span class="icon-badge ib-stone" style="width:24px;height:24px;"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>結果・振り返り</h2>
       <div class="placeholder">大会後にゴールタイム・写真・感想をここに追記します</div>
     </div>
   </section>
 
   <footer>
     Rakuten Trailrunners（元含む）2026合宿project
-    <div class="stamp">HAKUBA · NAGANO</div>
+    <div class="stamp"><svg class="icon-mtn" style="margin-right:4px;vertical-align:-0.1em;"><use href="#icon-mtn"/></svg>HAKUBA · NAGANO</div>
+    <div style="margin-top:10px;"><a href="./events/" style="font-size:11px;color:var(--sub);text-decoration:none;border-bottom:1px dotted var(--sub);">← 他のイベントページ一覧を見る</a></div>
   </footer>
 </div>
+
+<a href="#" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" aria-label="トップへ戻る">
+  <svg class="icon-mtn"><use href="#icon-mtn"/></svg>
+</a>
+
+<script>
+  /* ================================================================
+     EVENT_DATA — 次回イベント作成時はこのオブジェクトの中身だけを
+     書き換えれば、下のrender関数がRACE INFO／MEMBERS／INFORMATION／
+     リンク集／精算表／更新履歴を自動で描画します。
+     ================================================================ */
+  var EVENT_DATA = {
+    raceInfo: [
+      {label:"RACE NAME", value:"Hakuba International Classic", sub:"白馬国際クラシック"},
+      {label:"DATE", value:"Sun, Sep 13, 2026"},
+      {label:"PRE-RACE CHECK-IN", value:"Sat, Sep 12 ／ 12:00–17:00"},
+      {label:"VENUE", value:"Happo Dai-ni Parking", sub:"八方第二駐車場"},
+      {label:"LODGING", value:"Yuki no Sou (room only)", sub:"雪の荘（素泊まり）"}
+    ],
+    members: [
+      {name:"Go", courseLabel:"50km", courseClass:"c50", start:"7:00", cutoff:"18:00", bib:"Coming Soon!", prev:"Not yet recorded"},
+      {name:"Hirono", courseLabel:"29km", courseClass:"c29", start:"8:30", cutoff:"16:00", bib:"Coming Soon!", prev:"2025 29km, 6:30:00"},
+      {name:"Nat", courseLabel:"29km", courseClass:"c29", start:"8:30", cutoff:"16:00", bib:"Coming Soon!", prev:"2024 50km Trail, 7:53:27"},
+      {name:"Junsuke", courseLabel:"12km", courseClass:"c12", start:"9:00", cutoff:"13:00", bib:"Coming Soon!", prev:"Not yet recorded"},
+      {name:"Hina", courseLabel:"12km", courseClass:"c12", start:"9:00", cutoff:"13:00", bib:"Coming Soon!", prev:"Not yet recorded"}
+    ],
+    infoChecklist: [
+      {date:"2026/08/28", text:"ゼッケン（BIB）番号を確認する：MEMBERSページに掲載"},
+      {date:"2026/09/06〜", text:"天気・降水確率・風を確認する：MAPページの週間天気"},
+      {date:"2026/09/08〜", text:"持ち物・必携装備を確認する：OTHERページ"},
+      {date:"2026/09/11", text:"荷造りをする：ザック・ウェア・行動食など最終チェック"},
+      {date:"2026/09/12", text:"集合時間・場所を確認する：7:30 新宿集合"}
+    ],
+    links: [
+      {name:"雪の荘（宿）公式ページ", desc:"白馬村観光局サイト内・源泉：白馬八方温泉／朝食無料", url:"https://www.vill.hakuba.nagano.jp/stay/happo/864.html", linkText:"ページを見る"},
+      {name:"TABITABI Sakura Farm（Instagram）", desc:"ジェラート・デザート", url:"https://www.instagram.com/tabitabi_sakurafarm/", linkText:"Instagramを見る"},
+      {name:"雨雲レーダー（気象庁 高解像度降水ナウキャスト）", desc:"白馬村付近を中心表示", url:"https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:36.6975/lon:137.8480/colordepth:normal/elements:hrpns", linkText:"レーダーを見る"}
+    ],
+    settlement: {
+      categories: ["宿泊費","ガソリン代","高速代","食材費","温泉"],
+      members: [
+        {name:"Go", values:[5500,0,0,0,0]},
+        {name:"Hirono", values:[5500,0,2575,0,0]},
+        {name:"Nat", values:[5500,0,2575,0,0]},
+        {name:"Junsuke", values:[5500,0,2575,0,0]},
+        {name:"Hina", values:[5500,0,2575,0,0]}
+      ],
+      payees: [
+        {name:"GO", values:["-",0,10300,"-","-"]},
+        {name:"Hirono", values:[27500,"-","-",0,"-"]}
+      ],
+      note: "高速代：新宿（高井戸IC）⇔安曇野IC（中央道＋長野道、ETC普通車想定）片道¥5,150 × 往復 = ¥10,300 を、運転しないGoを除く4人で均等按分（¥2,575／人）。宿泊費：雪の荘 ¥5,500／人。表の下2行は「誰にいくら払えばいいか」の精算先別の合計です。"
+    },
+    // 新しい変更は配列の先頭に追加してください（新しい順で表示されます）
+    changelog: [
+      {date:"2026/08/13", text:"UIを山モチーフにリニューアル（ナビ・見出し・ボタン・チェックリストのアイコン統一、トップに戻るボタン追加）"},
+      {date:"2026/08/13", text:"コースマップにエイドステーション位置（距離・標高つき）を表示"},
+      {date:"2026/08/13", text:"精算の高速代をGoを除く4人で按分に修正、INFORMATIONを日付＋要件＋具体の形式に統一"},
+      {date:"2026/08/12", text:"コースマップ・標高グラフを実測GPXデータに更新、白馬村の週間天気ウィジェットを追加"},
+      {date:"2026/08/10", text:"ページを公開"}
+    ]
+  };
+
+  function fmtYen(v){ return (v === '-' || v === undefined || v === null) ? '-' : ('¥' + Number(v).toLocaleString()); }
+
+  function renderRaceInfo(){
+    var wrap = document.getElementById('race-info-grid');
+    if (!wrap) return;
+    wrap.innerHTML = EVENT_DATA.raceInfo.map(function(it){
+      var sub = it.sub ? '<br><span style="font-size:11px;color:var(--sub);font-weight:500;">'+it.sub+'</span>' : '';
+      return '<div class="info-item"><div class="label">'+it.label+'</div><div class="value">'+it.value+sub+'</div></div>';
+    }).join('');
+  }
+
+  function renderMembers(){
+    var wrap = document.getElementById('members-grid');
+    if (!wrap) return;
+    wrap.innerHTML = EVENT_DATA.members.map(function(m){
+      return '<div class="member">'
+        + '<span class="course '+m.courseClass+'">'+m.courseLabel+'</span>'
+        + '<div class="name">'+m.name+'</div>'
+        + '<div class="meta">Start '+m.start+' ／ Cutoff '+m.cutoff+'</div>'
+        + '<div class="bib">BIB No: '+m.bib+'</div>'
+        + '<div class="prev">Previous Result: '+m.prev+'</div>'
+        + '<div class="result">Result: To be updated after the race</div>'
+        + '</div>';
+    }).join('');
+    var countEl = document.getElementById('members-count');
+    if (countEl) countEl.textContent = EVENT_DATA.members.length;
+  }
+
+  function renderInfoChecklist(){
+    var wrap = document.getElementById('info-checklist');
+    if (!wrap) return;
+    wrap.innerHTML = EVENT_DATA.infoChecklist.map(function(it){
+      return '<li><span class="info-date">'+it.date+'</span>'+it.text+'</li>';
+    }).join('');
+  }
+
+  function renderLinks(){
+    var wrap = document.getElementById('links-facilities');
+    if (!wrap) return;
+    wrap.innerHTML = EVENT_DATA.links.map(function(l){
+      return '<div class="facility">'
+        + '<div class="fname">'+l.name+'</div>'
+        + '<div class="faddr">'+l.desc+'</div>'
+        + '<div class="fdo"><a href="'+l.url+'" target="_blank" rel="noopener">'+l.linkText+' →</a></div>'
+        + '</div>';
+    }).join('');
+  }
+
+  function renderSettlement(){
+    var wrap = document.getElementById('settlement-table');
+    if (!wrap) return;
+    var cats = EVENT_DATA.settlement.categories;
+    var html = '<tr><th>メンバー</th>' + cats.map(function(c){ return '<th>'+c+'</th>'; }).join('') + '<th>合計負担額</th></tr>';
+    var catTotals = cats.map(function(){ return 0; });
+    var grandTotal = 0;
+    EVENT_DATA.settlement.members.forEach(function(m){
+      var rowTotal = m.values.reduce(function(a,b){ return a + b; }, 0);
+      grandTotal += rowTotal;
+      m.values.forEach(function(v,i){ catTotals[i] += v; });
+      html += '<tr><td class="settlement-name">'+m.name+'</td>' + m.values.map(function(v){ return '<td>'+fmtYen(v)+'</td>'; }).join('') + '<td>'+fmtYen(rowTotal)+'</td></tr>';
+    });
+    html += '<tr class="settlement-total"><td>合計</td>' + catTotals.map(function(v){ return '<td>'+fmtYen(v)+'</td>'; }).join('') + '<td>'+fmtYen(grandTotal)+'</td></tr>';
+    html += '<tr class="settlement-payee-header"><td colspan="'+(cats.length+2)+'">支払先別 精算額</td></tr>';
+    EVENT_DATA.settlement.payees.forEach(function(p){
+      var rowTotal = p.values.reduce(function(a,b){ return a + (typeof b === 'number' ? b : 0); }, 0);
+      html += '<tr class="settlement-payee"><td class="settlement-name">→ '+p.name+' へ</td>' + p.values.map(function(v){ return '<td>'+fmtYen(v)+'</td>'; }).join('') + '<td>'+fmtYen(rowTotal)+'</td></tr>';
+    });
+    wrap.innerHTML = html;
+    var noteEl = document.getElementById('settlement-note');
+    if (noteEl) noteEl.textContent = EVENT_DATA.settlement.note;
+  }
+
+  function renderChangelog(){
+    var wrap = document.getElementById('changelog-list');
+    if (!wrap) return;
+    wrap.innerHTML = EVENT_DATA.changelog.map(function(c){
+      return '<li><span class="info-date">'+c.date+'</span>'+c.text+'</li>';
+    }).join('');
+    var countEl = document.getElementById('changelog-count');
+    if (countEl) countEl.textContent = EVENT_DATA.changelog.length;
+  }
+
+  renderRaceInfo();
+  renderMembers();
+  renderInfoChecklist();
+  renderLinks();
+  renderSettlement();
+  renderChangelog();
+</script>
 
 <script>
   function showPattern(which){
