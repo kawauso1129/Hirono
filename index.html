@@ -829,11 +829,11 @@
       {label:"LODGING", value:"Yuki no Sou (room only)", sub:"雪の荘（素泊まり）"}
     ],
     members: [
-      {name:"Go", courseLabel:"50km", courseClass:"c50", start:"7:00", cutoff:"18:00", bib:"5258", prev:"Not yet recorded"},
-      {name:"Hirono", courseLabel:"29km", courseClass:"c29", start:"8:30", cutoff:"16:00", bib:"3138", prev:"2025 29km, 6:28:45"},
-      {name:"Nat", courseLabel:"29km", courseClass:"c29", start:"8:30", cutoff:"16:00", bib:"2668", prev:"2022 28km, 5:55:29"},
-      {name:"Junsuke", courseLabel:"12km", courseClass:"c12", start:"9:00", cutoff:"13:00", bib:"1154", prev:"Not yet recorded"},
-      {name:"Hina", courseLabel:"12km", courseClass:"c12", start:"9:00", cutoff:"13:00", bib:"1629", prev:"Not yet recorded"}
+      {name:"Go", courseLabel:"50km", courseClass:"c50", start:"7:00", cutoff:"18:00", bib:"5258", prev:"Not yet recorded", result:"07:42:32（50kmソロ男子 92位）"},
+      {name:"Hirono", courseLabel:"29km", courseClass:"c29", start:"8:30", cutoff:"16:00", bib:"3138", prev:"2025 29km, 6:28:45", result:"06:29:55（29kmソロ女子 89位）"},
+      {name:"Nat", courseLabel:"29km", courseClass:"c29", start:"8:30", cutoff:"16:00", bib:"2668", prev:"2022 28km, 5:55:29", result:"05:40:56（29kmソロ男子 273位）"},
+      {name:"Junsuke", courseLabel:"12km", courseClass:"c12", start:"9:00", cutoff:"13:00", bib:"1154", prev:"Not yet recorded", result:"01:36:54（12kmソロ男子 95位）"},
+      {name:"Hina", courseLabel:"12km", courseClass:"c12", start:"9:00", cutoff:"13:00", bib:"1629", prev:"Not yet recorded", result:"01:40:34（12kmソロ女子 22位）"}
     ],
     infoChecklist: [
       {date:"2026/08/28", text:"ゼッケン（BIB）番号を確認する：MEMBERSページに掲載"},
@@ -862,7 +862,7 @@
     },
     // 新しい変更は配列の先頭に追加してください（新しい順で表示されます）
     changelog: [
-      {date:"2026/09/14", text:"精算まわりを実績ベースに修正（松代IC・Hina宿代・EV充電費・ケーキ／ジェラート追加）"},
+      {date:"2026/09/14", text:"公式リザルトを反映（Nat確認中）、精算まわりを実績ベースに修正"},
       {date:"2026/09/10", text:"集合時刻を9:00新宿集合に変更、前日晩ごはん（レタシャブ）を写真つきで更新、持ち寄りリスト・買い出しリストを追加"},
       {date:"2026/09/07", text:"公式スタートリストを反映し、全員のゼッケン番号を更新"},
       {date:"2026/08/25", text:"コースマップを最新の公式情報に更新"},
@@ -893,7 +893,7 @@
         + '<div class="meta">Start '+m.start+' ／ Cutoff '+m.cutoff+'</div>'
         + '<div class="bib">BIB No: '+m.bib+'</div>'
         + '<div class="prev">Previous Result: '+m.prev+'</div>'
-        + '<div class="result">Result: To be updated after the race</div>'
+        + '<div class="result">Result: '+m.result+'</div>'
         + '</div>';
     }).join('');
     var countEl = document.getElementById('members-count');
