@@ -210,6 +210,8 @@
   /* map */
   #map{width:100%;height:440px;border-radius:12px;border:1px solid var(--line);}
   .map-note{font-size:11.5px;color:var(--sub);background:var(--forest-soft);border-radius:10px;padding:9px 12px;margin-bottom:14px;line-height:1.6;}
+  .map-note a{color:var(--forest);font-weight:700;text-decoration:none;}
+  .map-note a:hover{text-decoration:underline;}
 
   /* facility cards */
   .facilities{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:16px;}
@@ -299,6 +301,20 @@
   .settlement-table tr.settlement-payee{background:var(--forest-soft);font-weight:700;}
   .settlement-table tr.settlement-payee td{color:var(--forest);}
   .settlement-table tr.settlement-payee .settlement-name{color:var(--forest);}
+  .settlement-table tr.settlement-row{cursor:pointer;}
+  .settlement-table tr.settlement-row:active{background:var(--wood-soft);}
+  .settlement-table .stl-toggle-ico{
+    display:inline-block;font-size:9px;margin-left:2px;
+    transition:transform .2s ease;
+  }
+  .settlement-table tr.settlement-row.open .stl-toggle-ico{transform:rotate(180deg);}
+  .settlement-table tr.settlement-detail{display:none;}
+  .settlement-table tr.settlement-detail.open{display:table-row;}
+  .settlement-table tr.settlement-detail td{
+    white-space:normal;background:var(--wood-soft);
+    font-size:11.5px;color:var(--sub);padding:8px 10px 12px;line-height:1.9;text-align:left;
+  }
+  .settlement-table tr.settlement-detail td b{color:var(--ink);font-weight:700;}
 
   .coming-soon-wrap{position:relative;}
   .coming-soon-blur{filter:blur(5px);opacity:0.55;pointer-events:none;user-select:none;}
@@ -391,15 +407,31 @@
 </div>
 
 <div class="nav">
+  <a href="#settlement"><svg class="icon-mtn nav-ic"><use href="#icon-mtn"/></svg>SETTLEMENT<span class="ja">（精算）</span></a>
   <a href="#overview"><svg class="icon-mtn nav-ic"><use href="#icon-mtn"/></svg>RACE OVERVIEW<span class="ja">（レース概要）</span></a>
   <a href="#schedule"><svg class="icon-mtn nav-ic"><use href="#icon-mtn"/></svg>SCHEDULE<span class="ja">（スケジュール）</span></a>
   <a href="#area"><svg class="icon-mtn nav-ic"><use href="#icon-mtn"/></svg>MAP<span class="ja">（マップ）</span></a>
   <a href="#event"><svg class="icon-mtn nav-ic"><use href="#icon-mtn"/></svg>EVENT INFO<span class="ja">（イベント情報）</span></a>
-  <a href="#settlement"><svg class="icon-mtn nav-ic"><use href="#icon-mtn"/></svg>SETTLEMENT<span class="ja">（精算）</span></a>
   <a href="#etc"><svg class="icon-mtn nav-ic"><use href="#icon-mtn"/></svg>OTHER<span class="ja">（そのほか）</span></a>
 </div>
 
 <div class="wrap">
+
+  <section id="settlement">
+    <div class="section-title"><span class="peak-badge icon-badge ib-dusk"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>SETTLEMENT <span class="title-ja">（精算）</span></div>
+    <div class="card">
+      <h2 class="acc-header open" onclick="toggleAcc(this)"><span class="icon-badge ib-dusk" style="width:24px;height:24px;"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>費用精算<svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></h2>
+      <div class="acc-body open">
+      <div class="map-note">行の🔽タップでカテゴリ別の内訳が開きます。金額はすべて実費で確定済みです。</div>
+
+      <div class="settlement-table-wrap">
+        <table class="settlement-table" id="settlement-table"></table>
+      </div>
+
+      <div class="pattern-note" id="settlement-note" style="margin-top:14px;"></div>
+      </div>
+    </div>
+  </section>
 
   <section id="overview">
     <div class="section-title"><span class="peak-badge icon-badge ib-forest"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>RACE OVERVIEW <span class="title-ja">（レース概要）</span></div>
@@ -458,7 +490,7 @@
         <tr><td>16:30〜17:00</td><td>雪の荘で荷物ピックアップ、車に積み込み</td></tr>
         <tr><td>17:00頃</td><td>車で出発（運転：Go→途中でJunsukeと交代）</td></tr>
         <tr><td>17:30〜19:00頃</td><td>大町でご飯（高速に乗る前、国道148号沿い）</td></tr>
-        <tr><td>19:00頃</td><td>安曇野ICから高速へ</td></tr>
+        <tr><td>19:00頃</td><td>松代ICから高速へ</td></tr>
         <tr><td>21:30〜22:00頃</td><td>新宿 到着目安</td></tr>
       </table>
       <div class="pattern-note">大町は黒部ダムカレーやそばが名物です。国道148号沿いなので、高速に乗る前の立ち寄りにちょうどいい位置にあります。</div>
@@ -632,7 +664,7 @@
         </div>
       </div>
       <div class="map-note" style="margin-top:10px;">※レタス150g・豚薄切り160g・鶏つくね110g・ご飯200g・うどん200gを想定した概算（一般的な食品成分値ベース）。エネルギー比では糖質5割強・たんぱく質3割弱・脂質2割程度で、レース前夜としては悪くないバランスです。あくまで一般的なスポーツ栄養の考え方に基づく目安なので、普段から胃腸が敏感な人は量を加減してください。</div>
-      <div class="map-note" style="margin-top:6px;">参考：ACSM「Pre-Event Meals」／de Oliveira EP, Burini RC, Jeukendrup A. "Gastrointestinal Complaints During Exercise: Prevalence, Etiology, and Nutritional Recommendations." <i>Sports Medicine</i> 44(Suppl 1), 2014／食品成分値は一般的な食品成分表ベースの概算です。</div>
+      <div class="map-note" style="margin-top:6px;">参考：<a href="https://www.mtsac.edu/kinesiology/sportsnutrition/documents/preeventmeals.pdf" target="_blank" rel="noopener">ACSM「Pre-Event Meals」（PDF）</a>／<a href="https://pubmed.ncbi.nlm.nih.gov/24791919/" target="_blank" rel="noopener">de Oliveira EP, Burini RC, Jeukendrup A. "Gastrointestinal Complaints During Exercise: Prevalence, Etiology, and Nutritional Recommendations." <i>Sports Medicine</i> 44(Suppl 1), 2014（PubMed）</a>／食品成分値は一般的な食品成分表ベースの概算です。</div>
 
       <div class="highlight" style="margin-top:14px;">
         <div class="htitle">持ち寄りリスト</div>
@@ -675,22 +707,6 @@
         </div>
       </div>
 
-      </div>
-    </div>
-  </section>
-
-  <section id="settlement">
-    <div class="section-title"><span class="peak-badge icon-badge ib-dusk"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>SETTLEMENT <span class="title-ja">（精算）</span></div>
-    <div class="card">
-      <h2 class="acc-header" onclick="toggleAcc(this)"><span class="icon-badge ib-dusk" style="width:24px;height:24px;"><svg class="icon-mtn"><use href="#icon-mtn"/></svg></span>費用精算<svg class="acc-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></h2>
-      <div class="acc-body">
-      <div class="map-note">縦：メンバー／横：勘定項目のマトリクスです。金額が確定し次第、このフレームに数字をうめていきます。</div>
-
-      <div class="settlement-table-wrap">
-        <table class="settlement-table" id="settlement-table"></table>
-      </div>
-
-      <div class="pattern-note" id="settlement-note" style="margin-top:14px;"></div>
       </div>
     </div>
   </section>
@@ -814,8 +830,8 @@
     ],
     members: [
       {name:"Go", courseLabel:"50km", courseClass:"c50", start:"7:00", cutoff:"18:00", bib:"5258", prev:"Not yet recorded"},
-      {name:"Hirono", courseLabel:"29km", courseClass:"c29", start:"8:30", cutoff:"16:00", bib:"3138", prev:"2025 29km, 6:30:00"},
-      {name:"Nat", courseLabel:"29km", courseClass:"c29", start:"8:30", cutoff:"16:00", bib:"2668", prev:"2024 50km Trail, 7:53:27"},
+      {name:"Hirono", courseLabel:"29km", courseClass:"c29", start:"8:30", cutoff:"16:00", bib:"3138", prev:"2025 29km, 6:28:45"},
+      {name:"Nat", courseLabel:"29km", courseClass:"c29", start:"8:30", cutoff:"16:00", bib:"2668", prev:"2022 28km, 5:55:29"},
       {name:"Junsuke", courseLabel:"12km", courseClass:"c12", start:"9:00", cutoff:"13:00", bib:"1154", prev:"Not yet recorded"},
       {name:"Hina", courseLabel:"12km", courseClass:"c12", start:"9:00", cutoff:"13:00", bib:"1629", prev:"Not yet recorded"}
     ],
@@ -832,22 +848,21 @@
       {name:"雨雲レーダー（気象庁 高解像度降水ナウキャスト）", desc:"白馬村付近を中心表示", url:"https://www.jma.go.jp/bosai/nowc/#zoom:10/lat:36.6975/lon:137.8480/colordepth:normal/elements:hrpns", linkText:"レーダーを見る"}
     ],
     settlement: {
-      categories: ["宿泊費","ガソリン代","高速代","食材費","温泉"],
+      categories: ["宿泊費","EV充電費","高速代","食材費","ケーキ","9/13夕飯"],
+      categoryPayee: ["Hirono","Go","Go","Go","Go","Go"],
+      payees: ["Go","Hirono"],
       members: [
-        {name:"Go", values:[5500,0,0,0,0]},
-        {name:"Hirono", values:[5500,0,2575,0,0]},
-        {name:"Nat", values:[5500,0,2575,0,0]},
-        {name:"Junsuke", values:[5500,0,2575,0,0]},
-        {name:"Hina", values:[5500,0,2575,0,0]}
+        {name:"Go", values:[5500,800,1576,1371,625,1664]},
+        {name:"Hirono", values:[5500,800,1576,1371,625,1388]},
+        {name:"Nat", values:[5500,800,1576,1371,625,2057]},
+        {name:"Junsuke", values:[5500,800,1576,1371,0,1664]},
+        {name:"Hina", values:[0,800,1576,1371,625,1389]}
       ],
-      payees: [
-        {name:"GO", values:["-",0,10300,"-","-"]},
-        {name:"Hirono", values:[27500,"-","-",0,"-"]}
-      ],
-      note: "高速代：新宿（高井戸IC）⇔安曇野IC（中央道＋長野道、ETC普通車想定）片道¥5,150 × 往復 = ¥10,300 を、運転しないGoを除く4人で均等按分（¥2,575／人）。宿泊費：雪の荘 ¥5,500／人。表の下2行は「誰にいくら払えばいいか」の精算先別の合計です。"
+      note: "【カテゴリ別合計】宿泊費¥22,000／EV充電費¥4,000／高速代¥7,880／食材費¥6,855／ケーキ¥2,500／9/13夕飯¥8,162。高速代：新宿⇔松代インター（関越道＋上信越道、ETC普通車想定）、Go申告の実費で往復¥3,940×2＝¥7,880（確定）を5人均等割（¥1,576／人、Go含む）でGoが立て替え。宿泊費：雪の荘 ¥5,500／人（Hinaは現地で直接精算済みのため対象外・表示は¥0）。EV充電費：スーパーチャージャー実費、Go申告で一人¥800（5人均等・Go含む）、合計¥4,000をGoが立て替え。ケーキ：Junsukeの誕生日ケーキのため、Junsukeの支払いなし。合計¥2,500をGoが立て替え、残り4人（Go・Hirono・Nat・Hina）で均等割（¥625／人）します。食材費：合計¥6,855をGoが立て替え、5人均等割（¥1,371／人）で精算します。ジェラートは購入なしのためカテゴリごと削除しました。9/13夕飯：税込¥8,162をGoが立て替え、注文内容ベースで按分（ロースカツ膳＝Nat・Go・Junsuke、かつ重＝Hina、天重＝Hirono、生ビールはNat、ノンアルビールは残り4人で割り勘、消費税10%込み・端数は1円単位で調整）。上段の「→○○へ」は各自が最終的に払う相手別の合計です。"
     },
     // 新しい変更は配列の先頭に追加してください（新しい順で表示されます）
     changelog: [
+      {date:"2026/09/14", text:"精算まわりを実績ベースに修正（松代IC・Hina宿代・EV充電費・ケーキ／ジェラート追加）"},
       {date:"2026/09/10", text:"集合時刻を9:00新宿集合に変更、前日晩ごはん（レタシャブ）を写真つきで更新、持ち寄りリスト・買い出しリストを追加"},
       {date:"2026/09/07", text:"公式スタートリストを反映し、全員のゼッケン番号を更新"},
       {date:"2026/08/25", text:"コースマップを最新の公式情報に更新"},
@@ -908,25 +923,54 @@
   function renderSettlement(){
     var wrap = document.getElementById('settlement-table');
     if (!wrap) return;
-    var cats = EVENT_DATA.settlement.categories;
-    var html = '<tr><th>メンバー</th>' + cats.map(function(c){ return '<th>'+c+'</th>'; }).join('') + '<th>合計負担額</th></tr>';
-    var catTotals = cats.map(function(){ return 0; });
+    var data = EVENT_DATA.settlement;
+    var cats = data.categories;
+    var catPayee = data.categoryPayee;
+    var payeeList = data.payees;
+    var colCount = 2 + payeeList.length;
+
+    var html = '<tr><th>メンバー</th><th>合計負担額</th>' + payeeList.map(function(p){ return '<th>→ '+p+'へ</th>'; }).join('') + '</tr>';
+
     var grandTotal = 0;
-    EVENT_DATA.settlement.members.forEach(function(m){
+    var payeeGrandTotals = payeeList.map(function(){ return 0; });
+
+    data.members.forEach(function(m){
       var rowTotal = m.values.reduce(function(a,b){ return a + b; }, 0);
       grandTotal += rowTotal;
-      m.values.forEach(function(v,i){ catTotals[i] += v; });
-      html += '<tr><td class="settlement-name">'+m.name+'</td>' + m.values.map(function(v){ return '<td>'+fmtYen(v)+'</td>'; }).join('') + '<td>'+fmtYen(rowTotal)+'</td></tr>';
+
+      var owed = payeeList.map(function(){ return 0; });
+      m.values.forEach(function(v,i){
+        var payee = catPayee[i];
+        var pIdx = payeeList.indexOf(payee);
+        if (pIdx === -1 || m.name === payee) return;
+        owed[pIdx] += v;
+      });
+      owed.forEach(function(v,i){ payeeGrandTotals[i] += v; });
+
+      html += '<tr class="settlement-row" onclick="toggleSettlementDetail(this)">';
+      html += '<td class="settlement-name">'+m.name+' <span class="stl-toggle-ico">🔽</span></td>';
+      html += '<td>'+fmtYen(rowTotal)+'</td>';
+      html += payeeList.map(function(p,i){ return '<td>'+(m.name === p ? '-' : fmtYen(owed[i]))+'</td>'; }).join('');
+      html += '</tr>';
+
+      var detailParts = [];
+      cats.forEach(function(c,i){
+        if (m.values[i] > 0) detailParts.push('<b>'+c+'</b> '+fmtYen(m.values[i]));
+      });
+      html += '<tr class="settlement-detail"><td colspan="'+colCount+'">'+(detailParts.length ? detailParts.join('　・　') : '内訳なし')+'</td></tr>';
     });
-    html += '<tr class="settlement-total"><td>合計</td>' + catTotals.map(function(v){ return '<td>'+fmtYen(v)+'</td>'; }).join('') + '<td>'+fmtYen(grandTotal)+'</td></tr>';
-    html += '<tr class="settlement-payee-header"><td colspan="'+(cats.length+2)+'">支払先別 精算額</td></tr>';
-    EVENT_DATA.settlement.payees.forEach(function(p){
-      var rowTotal = p.values.reduce(function(a,b){ return a + (typeof b === 'number' ? b : 0); }, 0);
-      html += '<tr class="settlement-payee"><td class="settlement-name">→ '+p.name+' へ</td>' + p.values.map(function(v){ return '<td>'+fmtYen(v)+'</td>'; }).join('') + '<td>'+fmtYen(rowTotal)+'</td></tr>';
-    });
+
+    html += '<tr class="settlement-total"><td>合計</td><td>'+fmtYen(grandTotal)+'</td>' + payeeGrandTotals.map(function(v){ return '<td>'+fmtYen(v)+'</td>'; }).join('') + '<td></td></tr>';
+
     wrap.innerHTML = html;
     var noteEl = document.getElementById('settlement-note');
-    if (noteEl) noteEl.textContent = EVENT_DATA.settlement.note;
+    if (noteEl) noteEl.textContent = data.note;
+  }
+
+  function toggleSettlementDetail(rowEl){
+    rowEl.classList.toggle('open');
+    var detail = rowEl.nextElementSibling;
+    if (detail && detail.classList.contains('settlement-detail')) detail.classList.toggle('open');
   }
 
   function renderChangelog(){
